@@ -21,7 +21,7 @@ function App() {
   const [mintingCompleted, setMintingCompleted] = useState(false);
 
 
-  const reclaimSDK = new ReclaimSDK('e44484c3-5fe3-4a94-8472-3660bedb0709');
+  const reclaimSDK = new ReclaimSDK('7acbff4d-81cc-4018-8653-7826681c5e7e	');
   const web3authRef = useRef(null);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function App() {
         const hasNFT = await checkNFTBalance(web3Instance, recipientAddress);
   
         if (!hasNFT) {
-          alert('Recipient is not KYCed (has no NFTs at the specified contract address).');
+          alert('Recipient is not KYCed');
           return;
         }
   
@@ -89,7 +89,7 @@ function App() {
         const txReceipt = await web3Instance.eth.sendTransaction(transaction);
         console.log('Transaction receipt:', txReceipt);
       } else {
-        alert('Recipient is not KYCed (has no NFTs).');
+        alert('Recipient is not KYCed.');
       }
     } catch (error) {
       console.error('Error sending transaction:', error);
@@ -170,8 +170,8 @@ function App() {
             <div className='bg-white p-4 rounded-lg shadow-md'>
               <QRCode value={sessionLink} />
             </div>
-            Scan the QR above or
-            <a href={sessionLink} className='text-blue-700 underline'>Click on this URL </a>
+            Scan the QR above or  
+            <a href={sessionLink} className='text-blue-700 underline'>Click on this URL to do your KYC </a>
           </div>
         );
       case 'COMPLETED':
@@ -202,7 +202,6 @@ function App() {
   };
 
 
-  
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-400 via-blue-500 to-blue-700 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-gradient-to-br from-blue-200 via-white to-blue-100 p-6 rounded-xl shadow-md relative text-gray-800">
@@ -211,9 +210,14 @@ function App() {
             {truncatedAddress}
           </div>
         }
-        <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-800">
-          Your Universal Web3 Wallet
-        </h1>
+        <div className="text-center">
+          <h1 className="text-4xl font-extrabold text-gray-800">
+            KYC3Wallet
+          </h1>
+          <p className="mt-2 text-xl text-gray-700">
+            compliance friendly web3 wallet for everyone
+          </p>
+        </div>
         {web3Instance ? (
           <>
             {sessionState === 'COMPLETED' ? (
@@ -237,7 +241,7 @@ function App() {
                 </div></>
             ) : (
               <div className="text-center text-red-500">
-                Please complete the KYC process to start using the wallet
+                Please complete the KYC process before sending funds.
               </div>
             )}
             <div>{renderReclaim()}</div>
@@ -245,7 +249,7 @@ function App() {
         ) : (
           <div>
             <button onClick={handleWeb3AuthLogin} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-              Login with Web3Auth
+              Sign up
             </button>
           </div>
         )}
