@@ -22,6 +22,8 @@ function App() {
 
 
   const reclaimSDK = new ReclaimSDK('7acbff4d-81cc-4018-8653-7826681c5e7e');
+
+  
   const web3authRef = useRef(null);
 
   useEffect(() => {
